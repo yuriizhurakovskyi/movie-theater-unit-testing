@@ -129,17 +129,24 @@ public class CinemaTest {
 	public void addSeanceNonWorkingHoursTest() {
 		cinema.setOpen(new Time(of(9, 00)));
 		cinema.setClose(new Time(of(11,59)));
+		System.out.println("Open : 09:00, Close: 11:59");
 		
 		Movie movie1 = new Movie("Movie 1", new Time(parse("02:17")));
 		Movie movie2 = new Movie("Movie 2", new Time(parse("01:10")));
 		Movie movie3 = new Movie("Movie 3", new Time(parse("03:04")));
+		Movie movie4 = new Movie("Movie 4", new Time(parse("04:04")));
+		Movie movie5 = new Movie("Movie 5", new Time(parse("03:19")));
 		cinema.addMovie(movie1);
 		cinema.addMovie(movie2);
 		cinema.addMovie(movie3);
+		cinema.addMovie(movie4);
+		cinema.addMovie(movie5);
 
-		cinema.addSeance(new Seance(movie1, new Time(of(10, 40))), "friday");
+		cinema.addSeance(new Seance(movie1, new Time(of(10, 49))), "friday");
 		cinema.addSeance(new Seance(movie2, new Time(of(1, 00))), "friday");
 		cinema.addSeance(new Seance(movie3, new Time(of(8, 50))), "friday");
+		cinema.addSeance(new Seance(movie4, new Time(of(9, 10))), "friday");
+		cinema.addSeance(new Seance(movie5, new Time(of(12, 0))), "friday");
 
 		Set<Seance> actual = cinema.getSchedules().entrySet().stream()
 				.filter(e -> e.getKey().name().equalsIgnoreCase("friday")).findAny().get().getValue().getSeances();
