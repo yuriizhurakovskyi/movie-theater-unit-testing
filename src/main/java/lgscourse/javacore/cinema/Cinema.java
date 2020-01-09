@@ -80,7 +80,7 @@ public class Cinema implements Serializable {
     private boolean checkTime(Seance seance, Days _day) {
         if (seance.getEndTime().compareTo(close) <= 0 
         		&& seance.getEndTime().compareTo(open) > 0 
-        		&& seance.getStartTime().compareTo(open) > 0) {
+        		&& seance.getStartTime().compareTo(open) >= 0) {
             if (schedules.get(_day).getSeances().size() == 0)
                 return true;
             Seance lastSeance = schedules.get(_day).getSeances().stream().max((s1, s2) -> {
